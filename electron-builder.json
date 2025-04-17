@@ -1,0 +1,24 @@
+{
+  "appId": "com.liveStatusMonitor.app",
+  "productName": "直播状态监控器",
+  "directories": {
+    "output": "release"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "mac": {
+    "category": "public.app-category.utilities"
+  },
+  "win": {
+    "target": [
+      "nsis"
+    ]
+  },
+  "linux": {
+    "target": [
+      "AppImage"
+    ],
+    "category": "Utility"
+  }
+} 
