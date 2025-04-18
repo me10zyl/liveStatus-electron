@@ -35,7 +35,7 @@ const StreamerList: React.FC<StreamerListProps> = ({ streamers, loading }) => {
           onClick={() => streamer.isLive && handleOpenStream(streamer.roomUrl)}
         >
           <div className="streamer-avatar">
-            <img src={streamer.avatar} alt={streamer.name} />
+            <img src={streamer.avatar} alt={streamer.name} referrerPolicy="no-referrer" />
             {streamer.isLive && <span className="live-badge">LIVE</span>}
           </div>
           

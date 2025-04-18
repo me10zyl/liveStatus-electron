@@ -5,6 +5,7 @@ import * as url from 'url';
 import Store from 'electron-store';
 import axios from 'axios';
 import {getDouyuFollowList} from "./platforms/douyu.ts";
+import {getBilibiliFollowList} from "./platforms/bilibili.ts";
 //import {getDouyinFollowList} from '../main/platforms/douyin'
 
 // 初始化存储
@@ -94,14 +95,6 @@ ipcMain.handle('get-following-list', async (event, platform) => {
 });
 
 
-
-// 哔哩哔哩关注列表
-async function getBilibiliFollowList(cookies: string) {
-  const response = await axios.get('https://api.bilibili.com/x/relation/followings', {
-    headers: { Cookie: cookies },
-  });
-  return response.data;
-}
 
 // 虎牙关注列表
 async function getHuyaFollowList(cookies: string) {
