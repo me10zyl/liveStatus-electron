@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { Sidebar } from './components/Sidebar';
+import Sidebar  from './components/Sidebar';
 import Dashboard from './pages/Dashboard';
 import Settings from './pages/Settings';
 import PlatformPage from './pages/PlatformPage';
 import { Streamer, PlatformType } from '../common/types';
-import './App.css';
+import './styles/App.css';
 
 // 定义声明electron全局对象
 declare global {
