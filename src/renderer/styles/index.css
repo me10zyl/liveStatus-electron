@@ -162,9 +162,40 @@ body {
   flex: 1;
 }
 
+/* 添加平台标签样式 */
+.streamer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.platform-badge {
+  display: flex;
+  align-items: center;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: white;
+  font-weight: 500;
+}
+
+.platform-icon {
+  margin-right: 4px;
+}
+
+.platform-name {
+  white-space: nowrap;
+}
+
+/* 修改现有样式以适应新布局 */
 .streamer-name {
   font-size: 16px;
-  margin-bottom: 5px;
+  margin-bottom: 0;
+  margin-right: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .stream-title {
@@ -393,4 +424,59 @@ body {
 
 .live-streamers-section h2 {
   margin-bottom: 20px;
+}
+
+/* 添加 Dashboard 平台统计的样式*/
+.platform-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.platform-stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  background-color: var(--card-background);
+  border-radius: 8px;
+  border-left: 4px solid;
+  text-decoration: none;
+  color: var(--text-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.platform-stat-card:hover {
+  transform: translateY(-4px);
+}
+
+.platform-stat-icon {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.platform-stat-name {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.platform-stat-counts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.live-count {
+  color: var(--live-color);
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.total-count {
+  color: var(--text-secondary);
+  font-size: 14px;
 }

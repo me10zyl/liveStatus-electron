@@ -7,6 +7,7 @@ interface DashboardProps {
   streamers: {[key in PlatformType]?: Streamer[]};
 }
 
+// 在 Dashboard 组件中添加平台统计信息
 const Dashboard: React.FC<DashboardProps> = ({ streamers }) => {
   const [liveStreamers, setLiveStreamers] = useState<Streamer[]>([]);
   const [loading, setLoading] = useState(false);
@@ -49,6 +50,13 @@ const Dashboard: React.FC<DashboardProps> = ({ streamers }) => {
     }
   };
 
+  // 添加平台统计信息
+  const platformStats = Object.entries(streamers).map(([platform, list]) => ({
+    platform: platform as PlatformType,
+    total: list?.length || 0,
+    live: list?.filter(s => s.isLive).length || 0
+  }));
+  
   return (
     <div className="dashboard">
       <div className="dashboard-header">
@@ -96,6 +104,37 @@ const Dashboard: React.FC<DashboardProps> = ({ streamers }) => {
       <div className="live-streamers-section">
         <h2>正在直播 ({liveStreamers.length})</h2>
         <StreamerList streamers={liveStreamers} loading={loading} />
+      </div>
+      
+      <div className="platform-stats">
+        {platformStats.map(stat => (
+          <Link 
+            key={stat.platform} 
+            to={`/platform/${stat.platform}`}
+            className="platform-stat-card"
+            style={{ 
+              borderColor: stat.platform === 'douyu' ? '#ff5d23' : 
+                          stat.platform === 'bilibili' ? '#00a1d6' : 
+                          stat.platform === 'huya' ? '#ffb700' : 
+                          '#fe2c55' 
+            }}
+          >
+            <div className="platform-stat-icon">
+              {stat.platform === 'douyu' ? '🐟' : 
+               stat.platform === 'bilibili' ? '📺' : 
+               stat.platform === 'huya' ? '🐯' : '🎵'}
+            </div>
+            <div className="platform-stat-name">
+              {stat.platform === 'douyu' ? '斗鱼' : 
+               stat.platform === 'bilibili' ? 'B站' : 
+               stat.platform === 'huya' ? '虎牙' : '抖音'}
+            </div>
+            <div className="platform-stat-counts">
+              <span className="live-count">{stat.live} 直播中</span>
+              <span className="total-count">共 {stat.total} 关注</span>
+            </div>
+          </Link>
+        ))}
       </div>
     </div>
   );

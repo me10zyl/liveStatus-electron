@@ -26,6 +26,22 @@ const StreamerList: React.FC<StreamerListProps> = ({ streamers, loading }) => {
     window.open(url, '_blank');
   };
 
+  // 获取平台名称和图标
+  const getPlatformInfo = (platform: string) => {
+    switch (platform) {
+      case 'douyu':
+        return { name: '斗鱼', icon: '🐟', color: '#ff5d23' };
+      case 'bilibili':
+        return { name: 'B站', icon: '📺', color: '#00a1d6' };
+      case 'huya':
+        return { name: '虎牙', icon: '🐯', color: '#ffb700' };
+      case 'douyin':
+        return { name: '抖音', icon: '🎵', color: '#fe2c55' };
+      default:
+        return { name: platform, icon: '🔴', color: '#666666' };
+    }
+  };
+
   return (
     <div className="streamer-list">
       {sortedStreamers.map(streamer => (
@@ -40,7 +56,16 @@ const StreamerList: React.FC<StreamerListProps> = ({ streamers, loading }) => {
           </div>
           
           <div className="streamer-info">
-            <h3 className="streamer-name">{streamer.name}</h3>
+            <div className="streamer-header">
+              <h3 className="streamer-name">{streamer.name}</h3>
+              <div 
+                className="platform-badge"
+                style={{ backgroundColor: getPlatformInfo(streamer.platform).color }}
+              >
+                <span className="platform-icon">{getPlatformInfo(streamer.platform).icon}</span>
+                <span className="platform-name">{getPlatformInfo(streamer.platform).name}</span>
+              </div>
+            </div>
             
             {streamer.isLive ? (
               <>
