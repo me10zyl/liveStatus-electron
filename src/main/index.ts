@@ -3,6 +3,8 @@ import * as path from 'path';
 import * as fs from 'fs';
 import * as url from 'url';
 import Store from 'electron-store';
+import axios from 'axios';
+//import {getDouyinFollowList} from '../main/platforms/douyin'
 
 // 初始化存储
 const store = new Store();
@@ -66,8 +68,61 @@ ipcMain.handle('set-cookie', async (event, platform, cookie) => {
 });
 
 ipcMain.handle('get-following-list', async (event, platform) => {
-  return store.get(`followingList.${platform}`, []);
+  //return store.get(`followingList.${platform}`, []);
+  const cookies = store.get(`cookies.${platform}`, '')
+  try {
+    switch (platform) {
+      case 'douyin':
+        return null ; //await getDouyinFollowList(cookies);
+      case 'douyu':
+        return await getDouyuFollowList(cookies);
+      case 'bilibili':
+        return await getBilibiliFollowList(cookies);
+      case 'huya':
+        return await getHuyaFollowList(cookies);
+      default:
+        throw new Error('不支持的平台');
+    }
+  } catch (error) {
+    console.error(`获取${platform}关注列表失败:`, error);
+    return { error: '获取关注列表失败' };
+  }
 });
+
+// 斗鱼关注列表
+async function getDouyuFollowList(cookies: string) {
+  const response = await axios.get('https://www.douyu.com/wgapi/livenc/liveweb/follow/list?sort=0&cid1=0', {
+    headers: {
+      Cookie: cookies,
+      "user-agent" : " Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 Edg/135.0.0.0",
+      "referrer" : "https://www.douyu.com/directory/myFollow"
+    },
+  });
+  // 假设API返回JSON格式的关注主播列表
+  let data = response.data;
+  console.log('douyuResponse',response.status, data)
+  if(data.error != 0){
+    return {error: data.msg}
+  }
+  return data;
+}
+
+// 哔哩哔哩关注列表
+async function getBilibiliFollowList(cookies: string) {
+  const response = await axios.get('https://api.bilibili.com/x/relation/followings', {
+    headers: { Cookie: cookies },
+  });
+  return response.data;
+}
+
+// 虎牙关注列表
+async function getHuyaFollowList(cookies: string) {
+  const response = await axios.get('https://www.huya.com/cache.php?m=UserFollow', {
+    headers: { Cookie: cookies },
+  });
+  return response.data;
+}
+
 
 ipcMain.handle('set-following-list', async (event, platform, list) => {
   store.set(`followingList.${platform}`, list);

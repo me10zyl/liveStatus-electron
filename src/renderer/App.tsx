@@ -32,9 +32,15 @@ function App() {
     try {
       setLoading(true);
       // 从缓存中获取之前保存的列表
-      const cachedList = await window.electron.getFollowingList(platform);
-      if (cachedList && cachedList.length > 0) {
-        setStreamers(prev => ({ ...prev, [platform]: cachedList }));
+      const followingList = await window.electron.getFollowingList(platform);
+      console.log('followingList', followingList)
+      // if(followingList.error){
+      //   console.error(`获取${platform}关注列表失败`, followingList);
+      //   setLoading(false);
+      //   return
+      // }
+      if (followingList && followingList.length > 0) {
+        setStreamers(prev => ({ ...prev, [platform]: followingList }));
       }
       setLoading(false);
     } catch (error) {
@@ -46,10 +52,12 @@ function App() {
   // 首次加载默认获取所有平台数据
   useEffect(() => {
     const platforms: PlatformType[] = ['douyu', 'bilibili', 'huya', 'douyin'];
-    platforms.forEach(platform => {
-      fetchFollowingData(platform);
-    });
+    // platforms.forEach(platform => {
+    //   fetchFollowingData(platform);
+    // });
+    fetchFollowingData(platforms[0])
     // 默认选中斗鱼平台
+
     setActivePlatform('douyu');
   }, []);
 
