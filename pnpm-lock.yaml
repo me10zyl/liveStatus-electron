@@ -11,6 +11,9 @@ importers:
       axios:
         specifier: ^1.8.4
         version: 1.8.4
+      bufferutil:
+        specifier: ^4.0.9
+        version: 4.0.9
       electron-builder:
         specifier: ^26.0.12
         version: 26.0.12(electron-builder-squirrel-windows@26.0.12)
@@ -19,7 +22,7 @@ importers:
         version: 10.0.1
       puppeteer:
         specifier: ^24.6.1
-        version: 24.6.1(typescript@5.8.3)
+        version: 24.6.1(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@6.0.5)
       react:
         specifier: ^19.1.0
         version: 19.1.0
@@ -29,6 +32,9 @@ importers:
       react-router-dom:
         specifier: ^7.5.0
         version: 7.5.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      utf-8-validate:
+        specifier: ^6.0.5
+        version: 6.0.5
     devDependencies:
       '@types/react':
         specifier: ^19.1.2
@@ -171,8 +177,8 @@ packages:
     resolution: {integrity: sha512-Qkzpg2s9GnVV2I2BjRksUi43U5e6+zaQMcjoJy0C+C5oxaKl+fmckGDQFtRpZpZV0NQekuZZ+tGz7EA9TVnQtQ==}
     engines: {node: '>=12'}
 
-  '@electron/node-gyp@https://codeload.github.com/electron/node-gyp/tar.gz/06b29aafb7708acef8b3669835c8a7857ebc92d2':
-    resolution: {tarball: https://codeload.github.com/electron/node-gyp/tar.gz/06b29aafb7708acef8b3669835c8a7857ebc92d2}
+  '@electron/node-gyp@git+https://git@github.com:electron/node-gyp.git#06b29aafb7708acef8b3669835c8a7857ebc92d2':
+    resolution: {commit: 06b29aafb7708acef8b3669835c8a7857ebc92d2, repo: git@github.com:electron/node-gyp.git, type: git}
     version: 10.2.0-electron.1
     engines: {node: '>=12.13.0'}
     hasBin: true
@@ -764,6 +770,10 @@ packages:
 
   buffer@5.7.1:
     resolution: {integrity: sha512-EHcyIPBQ4BSGlvjB16k5KgAJ27CIsHY/2JBmCRReo48y9rQ3MaUzWX3KVlBa4U7MyX02HdVj0K7C3WaB3ju7FQ==}
+
+  bufferutil@4.0.9:
+    resolution: {integrity: sha512-WDtdLmJvAuNNPzByAYpRo2rF1Mmradw6gvWsQKf63476DDXmomT9zUiGypLcG4ibIM67vhAj8jJRdbmEws2Aqw==}
+    engines: {node: '>=6.14.2'}
 
   builder-util-runtime@9.3.1:
     resolution: {integrity: sha512-2/egrNDDnRaxVwK3A+cJq6UOlqOdedGA7JPqCeJjN2Zjk1/QB/6QUi3b714ScIGS7HafFXTyzJEOr5b44I3kvQ==}
@@ -1607,6 +1617,10 @@ packages:
   node-api-version@0.2.1:
     resolution: {integrity: sha512-2xP/IGGMmmSQpI1+O/k72jF/ykvZ89JeuKX3TLJAYPDVLUalrshrLHkeVcCCZqG/eEa635cr8IBYzgnDvM2O8Q==}
 
+  node-gyp-build@4.8.4:
+    resolution: {integrity: sha512-LA4ZjwlnUblHVgq0oBF3Jl/6h/Nvs5fzBLwdEF4nuxnFdsfajde4WfxtJr3CaiH+F6ewcIB/q4jQ4UzPyid+CQ==}
+    hasBin: true
+
   node-releases@2.0.19:
     resolution: {integrity: sha512-xxOWJsBKtzAq7DY0J+DTzuz58K8e7sJbdgwkbMWQe8UYB6ekmsQ45q0M/tJDsGaZmbC+l7n57UV8Hl5tHxO9uw==}
 
@@ -2061,6 +2075,10 @@ packages:
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
 
+  utf-8-validate@6.0.5:
+    resolution: {integrity: sha512-EYZR+OpIXp9Y1eG1iueg8KRsY8TuT8VNgnanZ0uA3STqhHQTLwbl+WX76/9X5OY12yQubymBpaBSmMPkSTQcKA==}
+    engines: {node: '>=6.14.2'}
+
   utf8-byte-length@1.0.5:
     resolution: {integrity: sha512-Xn0w3MtiQ6zoz2vFyUVruaCL53O/DwUvkEeOvj+uulMm0BkUGYWmBYVyElqZaSLhY6ZD0ulfU3aBra2aVT4xfA==}
 
@@ -2346,7 +2364,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@electron/node-gyp@https://codeload.github.com/electron/node-gyp/tar.gz/06b29aafb7708acef8b3669835c8a7857ebc92d2':
+  '@electron/node-gyp@git+https://git@github.com:electron/node-gyp.git#06b29aafb7708acef8b3669835c8a7857ebc92d2':
     dependencies:
       env-paths: 2.2.1
       exponential-backoff: 3.1.2
@@ -2383,7 +2401,7 @@ snapshots:
 
   '@electron/rebuild@3.7.0':
     dependencies:
-      '@electron/node-gyp': https://codeload.github.com/electron/node-gyp/tar.gz/06b29aafb7708acef8b3669835c8a7857ebc92d2
+      '@electron/node-gyp': git+https://git@github.com:electron/node-gyp.git#06b29aafb7708acef8b3669835c8a7857ebc92d2
       '@malept/cross-spawn-promise': 2.0.0
       chalk: 4.1.2
       debug: 4.4.0
@@ -2920,6 +2938,10 @@ snapshots:
     dependencies:
       base64-js: 1.5.1
       ieee754: 1.2.1
+
+  bufferutil@4.0.9:
+    dependencies:
+      node-gyp-build: 4.8.4
 
   builder-util-runtime@9.3.1:
     dependencies:
@@ -3888,6 +3910,8 @@ snapshots:
     dependencies:
       semver: 7.7.1
 
+  node-gyp-build@4.8.4: {}
+
   node-releases@2.0.19: {}
 
   nopt@6.0.0:
@@ -4027,27 +4051,27 @@ snapshots:
 
   punycode@2.3.1: {}
 
-  puppeteer-core@24.6.1:
+  puppeteer-core@24.6.1(bufferutil@4.0.9)(utf-8-validate@6.0.5):
     dependencies:
       '@puppeteer/browsers': 2.10.0
       chromium-bidi: 3.0.0(devtools-protocol@0.0.1425554)
       debug: 4.4.0
       devtools-protocol: 0.0.1425554
       typed-query-selector: 2.12.0
-      ws: 8.18.1
+      ws: 8.18.1(bufferutil@4.0.9)(utf-8-validate@6.0.5)
     transitivePeerDependencies:
       - bare-buffer
       - bufferutil
       - supports-color
       - utf-8-validate
 
-  puppeteer@24.6.1(typescript@5.8.3):
+  puppeteer@24.6.1(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@6.0.5):
     dependencies:
       '@puppeteer/browsers': 2.10.0
       chromium-bidi: 3.0.0(devtools-protocol@0.0.1425554)
       cosmiconfig: 9.0.0(typescript@5.8.3)
       devtools-protocol: 0.0.1425554
-      puppeteer-core: 24.6.1
+      puppeteer-core: 24.6.1(bufferutil@4.0.9)(utf-8-validate@6.0.5)
       typed-query-selector: 2.12.0
     transitivePeerDependencies:
       - bare-buffer
@@ -4391,6 +4415,10 @@ snapshots:
     dependencies:
       punycode: 2.3.1
 
+  utf-8-validate@6.0.5:
+    dependencies:
+      node-gyp-build: 4.8.4
+
   utf8-byte-length@1.0.5: {}
 
   util-deprecate@1.0.2: {}
@@ -4440,7 +4468,10 @@ snapshots:
 
   wrappy@1.0.2: {}
 
-  ws@8.18.1: {}
+  ws@8.18.1(bufferutil@4.0.9)(utf-8-validate@6.0.5):
+    optionalDependencies:
+      bufferutil: 4.0.9
+      utf-8-validate: 6.0.5
 
   xmlbuilder@15.1.1: {}
 

@@ -6,12 +6,15 @@ import Store from 'electron-store';
 import axios from 'axios';
 import {getDouyuFollowList} from "./platforms/douyu.ts";
 import {getBilibiliFollowList} from "./platforms/bilibili.ts";
-//import {getDouyinFollowList} from '../main/platforms/douyin'
+import {getHuyaFollowList} from "./platforms/huya.ts";
+import {getDouyinFollowList} from '../main/platforms/douyin'
 
 // 初始化存储
 const store = new Store();
 
 let mainWindow: BrowserWindow | null = null;
+
+
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -78,7 +81,7 @@ ipcMain.handle('get-following-list', async (event, platform) => {
   try {
     switch (platform) {
       case 'douyin':
-        return null ; //await getDouyinFollowList(cookies);
+        return await getDouyinFollowList(cookies);
       case 'douyu':
         return await getDouyuFollowList(cookies);
       case 'bilibili':
@@ -94,18 +97,7 @@ ipcMain.handle('get-following-list', async (event, platform) => {
   }
 });
 
-
-
-// 虎牙关注列表
-async function getHuyaFollowList(cookies: string) {
-  const response = await axios.get('https://www.huya.com/cache.php?m=UserFollow', {
-    headers: { Cookie: cookies },
-  });
-  return response.data;
-}
-
-
 ipcMain.handle('set-following-list', async (event, platform, list) => {
   store.set(`followingList.${platform}`, list);
   return true;
-}); 
+});

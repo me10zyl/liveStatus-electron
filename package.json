@@ -4,8 +4,8 @@
   "description": "直播平台状态监控器",
   "main": "dist/main/index.js",
   "scripts": {
-    "dev": "vite",
-    "watch" : "vite --watch",
+    "dev": "set ELECTRON_FORCE_IS_PACKAGED=false && set ELECTRON_NO_ASAR=1 && chcp 65001 && vite",
+    "watch": "vite --watch",
     "build": "vite build && tsc -p tsconfig.node.json",
     "electron:dev": "electron .",
     "start": "electron-forge start",
@@ -27,11 +27,13 @@
   },
   "dependencies": {
     "axios": "^1.8.4",
+    "bufferutil": "^4.0.9",
     "electron-builder": "^26.0.12",
     "electron-store": "^10.0.1",
     "puppeteer": "^24.6.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-router-dom": "^7.5.0"
+    "react-router-dom": "^7.5.0",
+    "utf-8-validate": "^6.0.5"
   }
 }

@@ -34,6 +34,10 @@ export default defineConfig({
             }
         })
     ],
+    // 添加以下配置处理 puppeteer 相关依赖
+    optimizeDeps: {
+        include: ['bufferutil', 'utf-8-validate'],
+    },
     publicDir: resolve(__dirname, './src/renderer/assets'),
     resolve: {
         alias: {

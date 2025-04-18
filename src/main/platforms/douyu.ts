@@ -12,7 +12,6 @@ export async function getDouyuFollowList(cookies: string): Promise<Streamer[]> {
     });
     // 假设API返回JSON格式的关注主播列表
     let data = response.data;
-    console.log('douyuResponse',response.status, data)
     if(data.error != 0){
         return [];
     }

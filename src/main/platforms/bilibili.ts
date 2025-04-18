@@ -17,7 +17,6 @@ export async function getBilibiliFollowList(cookies: string): Promise<Streamer[]
         });
         
         let data = response.data;
-        console.log(`biliResponse page ${currentPage}`, response.status, data);
         
         if (data.code !== 0) {
             return [];
