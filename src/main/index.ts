@@ -4,6 +4,7 @@ import * as fs from 'fs';
 import * as url from 'url';
 import Store from 'electron-store';
 import axios from 'axios';
+import {getDouyuFollowList} from "./platforms/douyu.ts";
 //import {getDouyinFollowList} from '../main/platforms/douyin'
 
 // 初始化存储
@@ -70,6 +71,9 @@ ipcMain.handle('set-cookie', async (event, platform, cookie) => {
 ipcMain.handle('get-following-list', async (event, platform) => {
   //return store.get(`followingList.${platform}`, []);
   const cookies = store.get(`cookies.${platform}`, '')
+  if(!cookies){
+    return {error: '未设置Cookie'}
+  }
   try {
     switch (platform) {
       case 'douyin':
@@ -89,23 +93,7 @@ ipcMain.handle('get-following-list', async (event, platform) => {
   }
 });
 
-// 斗鱼关注列表
-async function getDouyuFollowList(cookies: string) {
-  const response = await axios.get('https://www.douyu.com/wgapi/livenc/liveweb/follow/list?sort=0&cid1=0', {
-    headers: {
-      Cookie: cookies,
-      "user-agent" : " Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 Edg/135.0.0.0",
-      "referrer" : "https://www.douyu.com/directory/myFollow"
-    },
-  });
-  // 假设API返回JSON格式的关注主播列表
-  let data = response.data;
-  console.log('douyuResponse',response.status, data)
-  if(data.error != 0){
-    return {error: data.msg}
-  }
-  return data;
-}
+
 
 // 哔哩哔哩关注列表
 async function getBilibiliFollowList(cookies: string) {
